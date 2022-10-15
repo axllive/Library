@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Library.Models.Livro>
+
+@{
+    ViewData["Title"] = "Livros";
+}
+
+<h1>Livros</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="table-livros" class=" table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Nome do Livro
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autor)
+            </th>
+            <th>
+                Está emprestado?
+            </th>
+            <th>
+                Emprestado de:
+            </th>
+            <th>
+                Emprestado até:
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aluno)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autor.AuthorName)
+            </td>
+            <td>
+                    @if (item.IsBorrowed) {
+                        <div class="text-center">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                    }
+                    else{
+                        <div class="text-center">
+                            <i class="fas fa-thumbs-down"></i>
+                        </div>
+                    }
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InicioEmprestimo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FimEmprestimo)
+            </td>
+            <td>
+                @if (item.IsBorrowed) {
+                        <i>@Html.DisplayFor(modelItem => item.Aluno.Aluno)</i>
+                }
+                else{
+                    <i > </i>
+                }
+             </td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <a asp-action="Edit" asp-route-id="@item.LivroID"
+                            type="button" class="btn btn-outline-secondary">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.LivroID"
+                            type="button" class="btn btn-outline-secondary">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.LivroID"
+                            type="button" class="btn btn-outline-secondary">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script src="https://kit.fontawesome.com/56e927f0da.js" crossorigin="anonymous"></script>

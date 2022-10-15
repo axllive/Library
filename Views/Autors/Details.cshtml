@@ -1,0 +1,72 @@
+﻿@model Library.Models.Autor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Autor: <l style="font-size: 32px;" >@Html.DisplayFor(model => model.AuthorName)</l></h4>
+    <hr />
+</div>
+<ul class="nav justify-content-start">
+    <li class="nav-item">
+        <a asp-action="Edit" asp-route-id="@Model.AuthorID" class="nav-link">Editar</a>
+    </li>
+    <li class="nav-item">
+        <a asp-action="Index" class="nav-link">Voltar</a>
+    </li>
+</ul>
+<hr />
+<h1>Livros deste Autor</h1>
+<table id="table-livros" class=" table table-dark table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                Nome do Livro
+            </th>
+            <th>
+                Está emprestado?
+            </th>
+            <th>
+                Emprestado de:
+            </th>
+            <th>
+                Emprestado até:
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Livro)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @if (item.IsBorrowed)
+                    {
+                        <div class="text-center">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center">
+                            <i class="fas fa-thumbs-down"></i>
+                        </div>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InicioEmprestimo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FimEmprestimo)
+                </td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Library.Models.UsuarioModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Alunos</h1>
+
+<p>
+    <a asp-action="Create">Criar</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAdmin)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAdmin)
+            </td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <a asp-action="Edit" asp-route-id="@item.UsrID"
+                    type="button" class="btn btn-outline-secondary">
+                        <i class="far fa-edit"></i>
+                    </a>
+                        <a asp-action="Details" asp-route-id="@item.UsrID"
+                    type="button" class="btn btn-outline-secondary">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                        <a asp-action="Delete" asp-route-id="@item.UsrID"
+                    type="button" class="btn btn-outline-secondary">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

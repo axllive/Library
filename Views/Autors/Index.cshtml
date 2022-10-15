@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Library.Models.Autor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class=" table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorName)
+            </td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <a asp-action="Edit" asp-route-id="@item.AuthorID"
+                type="button" class="btn btn-outline-secondary">
+                    <i class="far fa-edit"></i>
+                </a>
+                    <a asp-action="Details" asp-route-id="@item.AuthorID"
+                type="button" class="btn btn-outline-secondary">
+                    <i class="fas fa-info-circle"></i>
+                </a>
+                    <a asp-action="Delete" asp-route-id="@item.AuthorID"
+                type="button" class="btn btn-outline-secondary">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
